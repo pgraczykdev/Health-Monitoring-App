@@ -33,22 +33,22 @@ prompt APPLICATION 100 - Health Monitoring App
 -- Application Export:
 --   Application:     100
 --   Name:            Health Monitoring App
---   Date and Time:   19:20 Piątek Październik 11, 2024
+--   Date and Time:   17:40 Sobota Październik 12, 2024
 --   Exported By:     HMA
 --   Flashback:       0
 --   Export Type:     Application Export
---     Pages:                      3
---       Items:                    3
+--     Pages:                      4
+--       Items:                    6
 --       Processes:                4
---       Regions:                  2
---       Buttons:                  1
+--       Regions:                  4
+--       Buttons:                  3
 --     Shared Components:
 --       Logic:
 --         Build Options:          1
 --       Navigation:
 --         Lists:                  2
 --         Breadcrumbs:            1
---           Entries:              1
+--           Entries:              2
 --       Security:
 --         Authentication:         1
 --         Authorization:          1
@@ -151,7 +151,7 @@ wwv_flow_imp_shared.create_list(
  p_id=>wwv_flow_imp.id(14921902119802844)
 ,p_name=>'Navigation Menu'
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>41478960622721
+,p_version_scn=>41479051841233
 );
 wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(15221611195802491)
@@ -160,6 +160,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_link_target=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
 ,p_list_item_icon=>'fa-home'
 ,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(15712118524455742)
+,p_list_item_display_sequence=>20
+,p_list_item_link_text=>'API Configuration'
+,p_list_item_link_target=>'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-forms'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'2'
 );
 end;
 /
@@ -772,6 +781,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_short_name=>'Home'
 ,p_link=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>1
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(15713030662455724)
+,p_short_name=>'API Configuration'
+,p_link=>'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>2
 );
 end;
 /
@@ -17928,6 +17943,149 @@ wwv_flow_imp_page.create_page_plug(
   'expand_shortcuts', 'N',
   'output_as', 'HTML',
   'show_line_breaks', 'Y')).to_clob
+);
+end;
+/
+prompt --application/pages/page_00002
+begin
+wwv_flow_imp_page.create_page(
+ p_id=>2
+,p_name=>'API Configuration'
+,p_alias=>'API-CONFIGURATION'
+,p_step_title=>'API Configuration'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(15712567256455731)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(15037180145802771)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_imp.id(14921481066802847)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_imp.id(15099923877802734)
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(15713234764455722)
+,p_plug_name=>'API Configuration Form'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(15024734111802777)
+,p_plug_display_sequence=>10
+,p_location=>null
+,p_plug_header=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<p>',
+'  Please use this form to enter the necessary Strava API credentials. These',
+'  credentials will allow the system to communicate with Strava and access user',
+'  data.',
+'</p>',
+'<p><strong>How to Use:</strong></p>',
+'<ol>',
+'  <li>',
+'    <strong>Strava Client ID</strong> This is the Client ID you received when registering your',
+'    application with Strava.',
+'  </li>',
+'  <li>',
+'    <strong>Strava Client Secret</strong>: This is the Client Secret provided by Strava for',
+'    your application.',
+'  </li>',
+'  <li>',
+'    <strong>Redirect URI</strong>: Provide the Redirect URI that you configured in the',
+'    Strava Developer Portal.',
+'  </li>',
+'  <li>',
+'    <strong>Submit</strong>: Click the Submit button to save these settings. The system will securely',
+'    store the credentials for API integration.',
+'  </li>',
+'</ol>',
+'<p>',
+'  Ensure that all the required fields are filled correctly to successfully',
+'  connect with Strava.',
+'</p>',
+''))
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(15717782693450105)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(15713234764455722)
+,p_button_name=>'SUBMIT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(15098325793802735)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Submit'
+,p_button_position=>'CHANGE'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(15714372451455717)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(15713234764455722)
+,p_button_name=>'CANCEL'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(15098325793802735)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+);
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(15716069785455715)
+,p_branch_action=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>1
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15717342878450101)
+,p_name=>'P2_STRAVA_CLIENT_ID'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
+,p_prompt=>'Strava Client ID'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15717412524450102)
+,p_name=>'P2_STRAVA_CLIENT_SECRET'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
+,p_prompt=>'Strava Client Secret'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15717673075450104)
+,p_name=>'P2_STRAVA_REDIRECT_URI'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
+,p_prompt=>'Strava Redirect URI'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 end;
 /

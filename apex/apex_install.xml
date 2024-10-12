@@ -7,7 +7,7 @@
         xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-<changeSet id="INSTALL_100" author="HMA"      >
+<changeSet id="apex-1" author="pg"      >
     <n0:runApexScript objectName="install" objectType="SCRIPT" ownerName="HMA" sourceType="STRING" >
         <n0:source><![CDATA[
 declare 
