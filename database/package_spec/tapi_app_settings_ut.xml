@@ -7,13 +7,13 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
  <changeSet id="1" author="pg">
         <n0:createOraclePackageSpec 
-        objectName="tapi_api_configuration_ut" 
+        objectName="tapi_app_settings_ut" 
         objectType="PACKAGE_SPEC" 
         ownerName="HMA"  
         replaceIfExists="true"
         >
             <n0:source><![CDATA[
-create or replace package tapi_api_configuration_ut is
+ create or replace package tapi_app_settings_ut is
     --%suite
 
     --%test() 
@@ -31,7 +31,7 @@ create or replace package tapi_api_configuration_ut is
     --%test()
     procedure test_del_procedure;
 
-end tapi_api_configuration_ut;
+end tapi_app_settings_ut;
             ]]></n0:source>
     </n0:createOraclePackageSpec>
  </changeSet>

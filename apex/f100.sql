@@ -33,22 +33,22 @@ prompt APPLICATION 100 - Health Monitoring App
 -- Application Export:
 --   Application:     100
 --   Name:            Health Monitoring App
---   Date and Time:   17:40 Sobota Październik 12, 2024
+--   Date and Time:   17:33 Niedziela Październik 13, 2024
 --   Exported By:     HMA
 --   Flashback:       0
 --   Export Type:     Application Export
---     Pages:                      4
---       Items:                    6
+--     Pages:                      5
+--       Items:                    7
 --       Processes:                4
---       Regions:                  4
---       Buttons:                  3
+--       Regions:                  6
+--       Buttons:                  5
 --     Shared Components:
 --       Logic:
---         Build Options:          1
+--         Build Options:          2
 --       Navigation:
---         Lists:                  2
+--         Lists:                  3
 --         Breadcrumbs:            1
---           Entries:              2
+--           Entries:              3
 --       Security:
 --         Authentication:         1
 --         Authorization:          1
@@ -109,6 +109,7 @@ wwv_imp_workspace.create_flow(
 ,p_exact_substitutions_only=>'Y'
 ,p_browser_cache=>'N'
 ,p_browser_frame=>'D'
+,p_runtime_api_usage=>'T'
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_auto_time_zone=>'N'
@@ -151,7 +152,7 @@ wwv_flow_imp_shared.create_list(
  p_id=>wwv_flow_imp.id(14921902119802844)
 ,p_name=>'Navigation Menu'
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>41479051841233
+,p_version_scn=>41479132786493
 );
 wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(15221611195802491)
@@ -169,6 +170,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_icon=>'fa-forms'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'2'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(16528068330816078)
+,p_list_item_display_sequence=>30
+,p_list_item_link_text=>'Application settings'
+,p_list_item_link_target=>'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-key'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'3'
 );
 end;
 /
@@ -206,6 +216,26 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_icon=>'fa-sign-out'
 ,p_list_item_disp_cond_type=>'USER_IS_NOT_PUBLIC_USER'
 ,p_parent_list_item_id=>wwv_flow_imp.id(15223160100802476)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+end;
+/
+prompt --application/shared_components/navigation/lists/application_configuration
+begin
+wwv_flow_imp_shared.create_list(
+ p_id=>wwv_flow_imp.id(16523178164870395)
+,p_name=>'Application Configuration'
+,p_list_status=>'PUBLIC'
+,p_required_patch=>wwv_flow_imp.id(16512092118870503)
+,p_version_scn=>41479132208854
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(16523565065870394)
+,p_list_item_display_sequence=>10
+,p_list_item_link_text=>'Configuration Options'
+,p_list_item_link_target=>'f?p=&APP_ID.:10010:&APP_SESSION.::&DEBUG.:10010::'
+,p_list_item_icon=>'fa-sliders'
+,p_list_text_01=>'Enable or disable application features'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 end;
@@ -787,6 +817,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_short_name=>'API Configuration'
 ,p_link=>'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>2
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(16528905376816077)
+,p_short_name=>'Application settings'
+,p_link=>'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>3
 );
 end;
 /
@@ -14591,8 +14627,16 @@ begin
 wwv_flow_imp_shared.create_build_option(
  p_id=>wwv_flow_imp.id(14920849929802849)
 ,p_build_option_name=>'Commented Out'
-,p_build_option_status=>'EXCLUDE'
-,p_version_scn=>41478960619525
+,p_build_option_status=>'INCLUDE'
+,p_version_scn=>41479132359216
+);
+wwv_flow_imp_shared.create_build_option(
+ p_id=>wwv_flow_imp.id(16512092118870503)
+,p_build_option_name=>'Feature: Configuration Options'
+,p_build_option_status=>'INCLUDE'
+,p_version_scn=>41479132208165
+,p_feature_identifier=>'APPLICATION_CONFIGURATION'
+,p_build_option_comment=>'Allow application administrators to enable or disable specific functionality, associated with an Oracle APEX build option, from within the application.'
 );
 end;
 /
@@ -17956,6 +18000,7 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
+,p_page_component_map=>'17'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15712567256455731)
@@ -18078,6 +18123,99 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
 ,p_prompt=>'Strava Redirect URI'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+end;
+/
+prompt --application/pages/page_00003
+begin
+wwv_flow_imp_page.create_page(
+ p_id=>3
+,p_name=>'Application settings'
+,p_alias=>'APPLICATION-SETTINGS'
+,p_step_title=>'Application settings'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(15717863066450106)
+,p_plug_name=>'Wallet path'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(15024734111802777)
+,p_plug_display_sequence=>10
+,p_location=>null
+,p_plug_header=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<p>Please enter the full file path to your Oracle Wallet directory. The Oracle Wallet is required for secure communication with the database or external APIs ',
+'    (such as Strava). Ensure the path points to the correct directory containing the cwallet.sso and other wallet files.</p>',
+'',
+'<p>',
+'    <ul>Example:',
+'<li>For Linux: /home/user/wallet</li>',
+'<li>For Windows: C:\Users\username\wallet</li>',
+'    </ul>',
+'</p>',
+'<p>',
+'    <strong>',
+'Note: The wallet path must be accessible from the application environment. Ensure that the directory permissions allow access for the application to read the wallet files.',
+'    </strong>',
+'</p>',
+'<p>',
+'If you''re unsure where the wallet is located or need help, please contact your system administrator.',
+'</p>'))
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(16528424065816078)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(15037180145802771)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_imp.id(14921481066802847)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_imp.id(15099923877802734)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(15718043886450108)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(15717863066450106)
+,p_button_name=>'SUBMIT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(15098325793802735)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Submit'
+,p_button_position=>'CHANGE'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(15718122570450109)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(15717863066450106)
+,p_button_name=>'CANCEL'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(15098325793802735)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Cancel'
+,p_button_position=>'CLOSE'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15717979269450107)
+,p_name=>'P3_WALLET_PATH'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(15717863066450106)
+,p_prompt=>'Wallet Path'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(15095888746802738)
