@@ -6,7 +6,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
  <changeSet id="1" author="pg">
-        <n0:createOraclePackageSpec objectName="tapi_api_configuration" objectType="PACKAGE_SPEC" ownerName="HMA"  replaceIfExists="true">
+        <n0:createOraclePackageSpec 
+        objectName="tapi_api_configuration" 
+        objectType="PACKAGE_SPEC" 
+        ownerName="HMA"  
+        replaceIfExists="true"
+        >
             <n0:source><![CDATA[
 create or replace package tapi_api_configuration is
     /**
