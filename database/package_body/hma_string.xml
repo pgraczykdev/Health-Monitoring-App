@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+ <changeSet id="1" author="pg">
+        <n0:createOraclePackageBody
+        objectName="hma_string" 
+        objectType="PACKAGE_BODY" 
+        ownerName="HMA"  
+        replaceIfExists="true"
+        >
+            <n0:source><![CDATA[
+create or replace package body hma_string is
+   gc_scope_prefix constant hma_varchar2.vc20 := LOWER($$plsql_unit)
+                                                 || '.';
+   function split (
+      p_str       in varchar2,
+      p_delimiter in varchar2
+   ) return hma_varchar2.hma_t_varchar2 
+   is
+      l_str    hma_varchar2.vc32767;
+      l_pos    number;
+      l_scope  logger_logs.scope%type := gc_scope_prefix || 'split';
+      l_params logger.tab_param;
+      l_result hma_varchar2.hma_t_varchar2 := hma_varchar2.hma_t_varchar2();
+   begin
+      logger.append_param(
+                         l_params,
+                         'p_str',
+                         p_str
+      );
+      logger.append_param(
+                         l_params,
+                         'p_delimiter',
+                         p_delimiter
+      );
+      logger.LOG(
+                'START',
+                l_scope,
+                null,
+                l_params
+      );
+      l_str := p_str || p_delimiter;
+      l_pos := INSTR(
+                    l_str,
+                    p_delimiter
+               );
+      while l_pos > 0 loop
+         l_result.extend; 
+         l_result(l_result.count) := SUBSTR(
+                                            l_str,
+                                            1,
+                                            l_pos - 1
+                                       ); 
+         l_str := SUBSTR(
+                        l_str,
+                        l_pos + LENGTH(p_delimiter)
+                  );
+         l_pos := INSTR(
+                       l_str,
+                       p_delimiter
+                  );
+      end loop;
+
+      logger.LOG(
+                'END',
+                l_scope
+      );
+      return l_result;
+   exception
+      when others then
+         logger.log_error(
+                         'Unhandled Exception',
+                         l_scope,
+                         null,
+                         l_params
+         );
+         raise;
+   end split;
+   -----------------------------------------------------------------
+   function join (
+      p_list      in hma_varchar2.hma_t_varchar2,
+      p_delimiter in varchar2
+   ) return varchar2 is
+      l_result hma_varchar2.vc32767 := '';
+      l_scope  logger_logs.scope%type := gc_scope_prefix || 'join';
+      l_params logger.tab_param;
+   begin
+      logger.append_param(
+                         l_params,
+                         'p_list - first element',
+                         p_list(1)
+      );
+      logger.append_param(
+                         l_params,
+                         'p_delimiter',
+                         p_delimiter
+      );
+      logger.LOG(
+                'START',
+                l_scope,
+                null,
+                l_params
+      );
+      for i in 1..p_list.COUNT loop
+         if i > 1 then
+            l_result := l_result || p_delimiter;
+         end if;
+         l_result := l_result || p_list(i);
+      end loop;
+
+      logger.LOG(
+                'END',
+                l_scope
+      );
+      return l_result;
+   exception
+      when others then
+         logger.log_error(
+                         'Unhandled Exception',
+                         l_scope,
+                         null,
+                         l_params
+         );
+         raise;
+   end join;
+end hma_string;
+            ]]></n0:source>
+    </n0:createOraclePackageBody>
+ </changeSet>
+</databaseChangeLog> 
