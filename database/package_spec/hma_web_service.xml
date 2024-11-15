@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+ <changeSet id="1" author="pg">
+        <n0:createOraclePackageSpec 
+        objectName="hma_web_service" 
+        objectType="PACKAGE_SPEC" 
+        ownerName="HMA"  
+        replaceIfExists="true"
+        >
+            <n0:source><![CDATA[
+create or replace package hma_web_service as
+   procedure send_request (
+      p_url          in varchar2,
+      p_http_method  in varchar2,
+      p_param_names  in apex_application_global.vc_arr2,
+      p_param_values in apex_application_global.vc_arr2,
+      p_response     out clob
+   );
+   
+    function build_strava_authorize_url(
+      p_client_id in varchar2,
+      p_redirect_uri in varchar2,
+      p_request_scope in varchar2 default 'read,activity:read'
+   ) return varchar2;
+end hma_web_service;
+            ]]></n0:source>
+    </n0:createOraclePackageSpec>
+ </changeSet>
+</databaseChangeLog> 
