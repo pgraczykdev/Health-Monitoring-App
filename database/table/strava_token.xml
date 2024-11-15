@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+ <changeSet id="1" author="pg">
+        <createTable tableName="strava_token">
+            <column name="token_id" type="NUMBER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="access_token" type="VARCHAR2(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="refresh_token" type="VARCHAR2(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="expires_at" type="NUMBER">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_updated" type="DATE" defaultValueComputed="SYSDATE">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog> 

@@ -19,7 +19,7 @@ whenever sqlerror exit sql.sqlcode rollback
 begin
 wwv_flow_imp.import_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
+,p_release=>'24.1.4'
 ,p_default_workspace_id=>14915234434809396
 ,p_default_application_id=>100
 ,p_default_id_offset=>0
@@ -33,24 +33,24 @@ prompt APPLICATION 100 - Health Monitoring App
 -- Application Export:
 --   Application:     100
 --   Name:            Health Monitoring App
---   Date and Time:   17:33 Niedziela Październik 13, 2024
+--   Date and Time:   17:14 Piątek Listopad 15, 2024
 --   Exported By:     HMA
 --   Flashback:       0
 --   Export Type:     Application Export
---     Pages:                      5
---       Items:                    7
---       Processes:                4
---       Regions:                  6
---       Buttons:                  5
+--     Pages:                      6
+--       Items:                   10
+--       Processes:                6
+--       Regions:                  7
+--       Buttons:                  6
 --     Shared Components:
 --       Logic:
 --         Build Options:          2
 --       Navigation:
 --         Lists:                  3
 --         Breadcrumbs:            1
---           Entries:              3
+--           Entries:              4
 --       Security:
---         Authentication:         1
+--         Authentication:         2
 --         Authorization:          1
 --       User Interface:
 --         Themes:                 1
@@ -69,7 +69,7 @@ prompt APPLICATION 100 - Health Monitoring App
 --       Reports:
 --       E-Mail:
 --     Supporting Objects:  Included (auto-install)
---   Version:         24.1.1
+--   Version:         24.1.4
 --   Instance ID:     7911607799861653
 --
 
@@ -98,14 +98,16 @@ wwv_imp_workspace.create_flow(
 ,p_timestamp_tz_format=>'DS'
 ,p_direction_right_to_left=>'N'
 ,p_flow_image_prefix => nvl(wwv_flow_application_install.get_image_prefix,'')
-,p_authentication_id=>wwv_flow_imp.id(14921129172802849)
+,p_authentication_id=>wwv_flow_imp.id(23313060782447178)
 ,p_application_tab_set=>0
 ,p_logo_type=>'T'
 ,p_logo_text=>'Health Monitoring App'
+,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
 ,p_flow_version=>'Release 1.0'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
+,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
 ,p_browser_cache=>'N'
 ,p_browser_frame=>'D'
@@ -823,6 +825,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_short_name=>'Application settings'
 ,p_link=>'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>3
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(22719177863257785)
+,p_short_name=>'Redirect'
+,p_link=>'f?p=&APP_ID.:9998:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>9998
 );
 end;
 /
@@ -14663,6 +14671,22 @@ wwv_flow_imp_shared.create_authentication(
 );
 end;
 /
+prompt --application/shared_components/security/authentications/custom
+begin
+wwv_flow_imp_shared.create_authentication(
+ p_id=>wwv_flow_imp.id(23313060782447178)
+,p_name=>'Custom'
+,p_scheme_type=>'NATIVE_CUSTOM'
+,p_attribute_01=>'authentication.sentry'
+,p_attribute_03=>'authentication.login'
+,p_attribute_05=>'N'
+,p_invalid_session_type=>'LOGIN'
+,p_use_secure_cookie_yn=>'N'
+,p_ras_mode=>0
+,p_version_scn=>41485292250609
+);
+end;
+/
 prompt --application/shared_components/plugins/template_component/theme_42_avatar
 begin
 wwv_flow_imp_shared.create_plugin(
@@ -17970,7 +17994,6 @@ wwv_flow_imp_page.create_page(
 ,p_step_title=>'Health Monitoring App'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
-,p_protection_level=>'C'
 ,p_page_component_map=>'13'
 );
 wwv_flow_imp_page.create_page_plug(
@@ -17988,6 +18011,111 @@ wwv_flow_imp_page.create_page_plug(
   'output_as', 'HTML',
   'show_line_breaks', 'Y')).to_clob
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(15718436347450112)
+,p_button_sequence=>10
+,p_button_name=>'STRAVA_LOGIN'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(15098325793802735)
+,p_button_image_alt=>'Strava Login'
+,p_grid_new_row=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15719091669450118)
+,p_name=>'STATE'
+,p_item_sequence=>20
+,p_prompt=>'New'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'PLAIN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15719192852450119)
+,p_name=>'CODE'
+,p_item_sequence=>30
+,p_prompt=>'New'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'PLAIN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(15719270136450120)
+,p_name=>'SCOPE'
+,p_item_sequence=>40
+,p_prompt=>'Scope'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_imp.id(15095888746802738)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'PLAIN'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(15719463345450122)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'SEND_REQUEST'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'declare',
+'   l_url          hma_varchar2.vc2000 := ''https://www.strava.com/oauth/token'';',
+'   l_http_method  hma_varchar2.vc20 := ''POST'';',
+'   l_param_names  APEX_APPLICATION_GLOBAL.VC_ARR2;',
+'   l_param_values APEX_APPLICATION_GLOBAL.VC_ARR2;',
+'   l_response     clob;',
+'begin',
+unistr('    -- Przypisanie parametr\00F3w zapytania'),
+'   l_param_names(1)  := ''client_id'';',
+'   l_param_values(1) := ''137390'';',
+'   l_param_names(2)  := ''client_secret'';',
+'   l_param_values(2) := ''54b20a75a550ebf973c5588212fc8934717e1cbd'';',
+'   l_param_names(3)  := ''code'';',
+'   l_param_values(3) := :CODE;',
+'   l_param_names(4)  := ''grant_type'';',
+'   l_param_values(4) := ''authorization_code'';',
+'   hma_web_service.send_request(',
+'                               p_url => l_url,',
+'                               p_http_method => l_http_method,',
+'                               p_param_names => l_param_names,',
+'                               p_param_values => l_param_values,',
+'                               p_response => l_response',
+'   );',
+'',
+'',
+'   logger.log(l_response);',
+'end;'))
+,p_process_clob_language=>'PLSQL'
+,p_process_when=>'CODE'
+,p_process_when_type=>'ITEM_IS_NOT_NULL'
+,p_internal_uid=>15719463345450122
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(15718537041450113)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'REDIRECT'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'declare',
+'    l_url hma_varchar2.vc4000;',
+'begin',
+'    l_url := apex_page.get_url(p_page => 1);',
+'    APEX_UTIL.REDIRECT_URL(''https://www.strava.com/oauth/authorize?client_id=137390&redirect_uri=https://g522d71b277b856-dev.adb.eu-frankfurt-1.oraclecloudapps.com/ords/r/hma/health-monitoring-app/home&response_type=code&scope=read,activity:read'');',
+'end;'))
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_internal_uid=>15718537041450113
+);
 end;
 /
 prompt --application/pages/page_00002
@@ -18000,7 +18128,7 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
-,p_page_component_map=>'17'
+,p_page_component_map=>'16'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15712567256455731)
@@ -18093,6 +18221,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
 ,p_prompt=>'Strava Client ID'
+,p_source=>'select config_value from table(tapi_api_configuration.tt(p_config_name => ''STRAVA_CLIENT_ID''));'
+,p_source_type=>'QUERY'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(15095888746802738)
@@ -18108,6 +18238,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
 ,p_prompt=>'Strava Client Secret'
+,p_source=>'select config_value from table(tapi_api_configuration.tt(p_config_name => ''STRAVA_CLIENT_SECRET''));'
+,p_source_type=>'QUERY'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(15095888746802738)
@@ -18123,6 +18255,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(15713234764455722)
 ,p_prompt=>'Strava Redirect URI'
+,p_source=>'select config_value from table(tapi_api_configuration.tt(p_config_name => ''STRAVA_REDIRECT_ID''));'
+,p_source_type=>'QUERY'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(15095888746802738)
@@ -18131,6 +18265,24 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(15718267964450110)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'SAVE'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'begin ',
+'    api_configuration_service.save(',
+'        p_client_id => :P2_STRAVA_CLIENT_ID,',
+'        p_client_secret => :P2_STRAVA_CLIENT_SECRET,',
+'        p_redirect_uri => :P2_STRAVA_REDIRECT_URI',
+'    );',
+'end;'))
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_internal_uid=>15718267964450110
 );
 end;
 /
@@ -18144,6 +18296,7 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
+,p_page_component_map=>'17'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15717863066450106)
@@ -18224,6 +18377,32 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+);
+end;
+/
+prompt --application/pages/page_09998
+begin
+wwv_flow_imp_page.create_page(
+ p_id=>9998
+,p_name=>'Redirect'
+,p_alias=>'REDIRECT'
+,p_step_title=>'Redirect'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_page_is_public_y_n=>'Y'
+,p_page_component_map=>'11'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(22718602568257796)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(15037180145802771)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_imp.id(14921481066802847)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_imp.id(15099923877802734)
 );
 end;
 /
@@ -18364,55 +18543,8 @@ wwv_flow_imp_shared.create_invokeapi_comp_param(
 ,p_value=>'P9999_REMEMBER'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(15217531023802496)
-,p_process_sequence=>20
-,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_INVOKE_API'
-,p_process_name=>'Login'
-,p_attribute_01=>'PLSQL_PACKAGE'
-,p_attribute_03=>'APEX_AUTHENTICATION'
-,p_attribute_04=>'LOGIN'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_internal_uid=>15217531023802496
-);
-wwv_flow_imp_shared.create_invokeapi_comp_param(
- p_id=>wwv_flow_imp.id(15218049638802495)
-,p_page_process_id=>wwv_flow_imp.id(15217531023802496)
-,p_page_id=>9999
-,p_name=>'p_username'
-,p_direction=>'IN'
-,p_data_type=>'VARCHAR2'
-,p_has_default=>false
-,p_display_sequence=>1
-,p_value_type=>'ITEM'
-,p_value=>'P9999_USERNAME'
-);
-wwv_flow_imp_shared.create_invokeapi_comp_param(
- p_id=>wwv_flow_imp.id(15218521362802494)
-,p_page_process_id=>wwv_flow_imp.id(15217531023802496)
-,p_page_id=>9999
-,p_name=>'p_password'
-,p_direction=>'IN'
-,p_data_type=>'VARCHAR2'
-,p_has_default=>false
-,p_display_sequence=>2
-,p_value_type=>'ITEM'
-,p_value=>'P9999_PASSWORD'
-);
-wwv_flow_imp_shared.create_invokeapi_comp_param(
- p_id=>wwv_flow_imp.id(15219081011802494)
-,p_page_process_id=>wwv_flow_imp.id(15217531023802496)
-,p_page_id=>9999
-,p_name=>'p_set_persistent_auth'
-,p_direction=>'IN'
-,p_data_type=>'BOOLEAN'
-,p_has_default=>true
-,p_display_sequence=>3
-,p_value_type=>'API_DEFAULT'
-);
-wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(15221328761802492)
-,p_process_sequence=>30
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_SESSION_STATE'
 ,p_process_name=>'Clear Page(s) Cache'
