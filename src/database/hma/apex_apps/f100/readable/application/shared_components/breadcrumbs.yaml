@@ -1,0 +1,63 @@
+---
+- # ====== Breadcrumb: Breadcrumb ==============================
+  id: 14921481066802847
+  identification: 
+    name: Breadcrumb
+
+  entries: 
+  - # ====== Entry: Home =========================================
+    id: 14921698245802846
+    identification: 
+      name: Home
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+
+  - # ====== Entry: API Configuration ============================
+    id: 15713030662455724
+    identification: 
+      name: API Configuration
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+        page: 2 # API Configuration
+
+  - # ====== Entry: Application settings =========================
+    id: 16528905376816077
+    identification: 
+      name: Application settings
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+        page: 3 # Application settings
+
+  - # ====== Entry: Redirect =====================================
+    id: 22719177863257785
+    identification: 
+      name: Redirect
+      page-number: 9998
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9998:&APP_SESSION.::&DEBUG.:::'
+        page: 9998 # Redirect
+

@@ -1,0 +1,44 @@
+---
+- # ====== Authentication: Oracle APEX Accounts ================
+  id: 14921129172802849
+  identification: 
+    name: Oracle APEX Accounts
+
+  subscription: 
+    version-number: 41478960619540
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+
+- # ====== Authentication: Custom ==============================
+  id: 23313060782447178
+  identification: 
+    name: Custom
+
+  subscription: 
+    version-number: 41485292250609
+
+  settings: 
+    type: Custom
+    sentry-function-name: authentication.sentry
+    authentication-function-name: authentication.login
+    enable-legacy-authentication-attributes: false
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+
