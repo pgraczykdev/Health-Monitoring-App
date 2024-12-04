@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+<!--BEGIN-->
+<include file="hma\table\api_configuration.sql" relativeToChangelogFile="true"/>
+<include file="hma\table\app_settings.sql" relativeToChangelogFile="true"/>
+<include file="hma\table\strava_token.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.package.logger.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.table.logger_logs.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.table.logger_logs_apex_items.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.table.logger_prefs.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.table.logger_prefs_by_client_id.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.view.logger_logs_5_min.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.view.logger_logs_60_min.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.admin.view.logger_logs_terse.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.sys.package.dbms_aq.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.sys.package.dbms_aqadm.sql" relativeToChangelogFile="true"/>
+<include file="hma\object_grant\object_grants_as_grantor.sys.package.dbms_crypto.sql" relativeToChangelogFile="true"/>
+<!--END-->
+<!--BEGIN CUSTOM-->
+<!--END CUSTOM-->
+</databaseChangeLog>

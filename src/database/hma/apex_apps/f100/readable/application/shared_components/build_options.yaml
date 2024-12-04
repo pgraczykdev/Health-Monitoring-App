@@ -1,0 +1,30 @@
+---
+- # ====== Build Option: Commented Out =========================
+  id: 14920849929802849
+  identification: 
+    name: Commented Out
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  subscription: 
+    version-number: 41479132359216
+
+- # ====== Build Option: Feature: Configuration Options ========
+  id: 16512092118870503
+  identification: 
+    name: 'Feature: Configuration Options'
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  comments: 
+    comments: Allow application administrators to enable or disable specific functionality, associated with an Oracle APEX build option, from within the application.
+
+  subscription: 
+    version-number: 41479132208165
+
