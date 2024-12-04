@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+<!--BEGIN-->
+<include file="hma\package_specs\api_configuration_service.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\authentication.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\console.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\hma_json.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\hma_string.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\hma_string_ut.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\hma_varchar2.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\hma_web_service.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\tapi_api_configuration.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\tapi_api_configuration_ut.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\tapi_app_settings.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_specs\tapi_app_settings_ut.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\api_configuration_service.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\authentication.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\console.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\hma_json.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\hma_string.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\hma_string_ut.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\hma_web_service.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\tapi_api_configuration.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\tapi_api_configuration_ut.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\tapi_app_settings.sql" relativeToChangelogFile="true"/>
+<include file="hma\package_bodies\tapi_app_settings_ut.sql" relativeToChangelogFile="true"/>
+<!--END-->
+</databaseChangeLog>
