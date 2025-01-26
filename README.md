@@ -33,4 +33,4 @@ Once the application is set up, users can:
 Special thanks to the maintainers and contributors of these open-source projects for providing invaluable tools that enhance the quality, stability, and traceability of this application:
 
 - **[Logger Log PL/SQL](https://github.com/OraOpenSource/Logger)**
-- **[utPLSQL](https://github.com/utPL
+- **[utPLSQL](https://github.com/utPLSQL/utPLSQL)**
